@@ -1,21 +1,37 @@
 import java.util.Scanner;
 
+
 public class EventOrganizer {
     public Object run;
 
     public <String> void run(){
-        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         EventCalender Calender = new EventCalender();
-        java.lang.String action;
         Date date = new Date();
+
+        java.lang.String action = (java.lang.String) " ";
         boolean run = true;
         while(run){
-            action = input.nextLine();
-            if(action == "A"){
+            java.lang.String Line = scanner.next();
+            java.lang.String[] token = Line.split(" ");
+            action = token[0];
+
+            if(action.equals("A")){
                 System.out.println("Add Event");
+            }
+            else if(action.equals("R")){
 
             }
-            else if(action == "Q"){
+            else if(action.equals("PE")){
+
+            }
+            else if(action.equals("PC")){
+
+            }
+            else if(action.equals("PD")){
+
+            }
+            else if(action.equals("Q")){
                 System.out.println("Event Organizer Terminated");
                 run = false;
             }
