@@ -46,6 +46,9 @@ public class EventOrganizer {
                 System.out.println("Event Organizer Terminated");
                 run = false;
             }
+            else{
+                System.out.println(token[0] + " is an invalid command");
+            }
         }
     }
 }

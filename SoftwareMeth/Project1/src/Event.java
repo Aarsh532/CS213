@@ -20,12 +20,12 @@ public class Event{
         AB2225,
         MU302
     }
-    public void setDate(Date date){
+    public void setInfo(Date date, Timeslot startTime, Location location, Contact contact, int duration){
         this.date = date;
-    }
-
-    public void setStartTime(Timeslot startTime){
         this.startTime = startTime;
+        this.location = location;
+        this.contact = contact;
+        this.duration = duration;
     }
 }
 
