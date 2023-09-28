@@ -7,7 +7,11 @@ public class EventOrganizer {
     public <String> void run(){
         Scanner scanner = new Scanner(System.in);
         EventCalender Calender = new EventCalender();
-
+        Date date = new Date();
+        Event event = new Event();
+        int year = 0;
+        int month = 0;
+        int day = 0;
 
         java.lang.String action = (java.lang.String) " ";
         boolean run = true;
@@ -16,11 +20,9 @@ public class EventOrganizer {
             java.lang.String[] token = Line.split(" ");
             action = token[0];
 
+            System.out.println(token[1]);
+
             if(action.equals("A")){
-                Date date = new Date(
-                );
-                Event event = new Event(
-                );
                 System.out.println("Add Event");
             }
             else if(action.equals("R")){
