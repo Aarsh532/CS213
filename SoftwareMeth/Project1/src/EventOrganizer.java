@@ -16,14 +16,19 @@ public class EventOrganizer {
         java.lang.String action = (java.lang.String) " ";
         boolean run = true;
         while(run){
-            java.lang.String Line = scanner.next();
+            java.lang.String Line = scanner.nextLine();
             java.lang.String[] token = Line.split(" ");
             action = token[0];
 
-            System.out.println(token[1]);
+
 
             if(action.equals("A")){
-                System.out.println("Add Event");
+                java.lang.String[] days = token[1].split("/");
+                date.setDate(Integer.parseInt(days[2]),Integer.parseInt(days[0]), Integer.parseInt(days[1]));
+                if(!date.isValid()){System.out.println(token[1] + "Invalid Calender Date");}
+
+
+
             }
             else if(action.equals("R")){
 

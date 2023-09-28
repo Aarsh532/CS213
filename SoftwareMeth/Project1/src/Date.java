@@ -13,15 +13,12 @@ public class Date {
     public static final int LEAP_YEAR_DAY = 29;
     public static final int LOWEST_DAY = 1;
     public static final int EQUAL = 0;
-    public void setYear(int year){
+    public void setDate(int year, int month, int day){
         this.year = year;
-    }
-    public void setMonth(int month){
+        this.day = day;
         this.month = month;
     }
-    public void setDate(int day){
-        this.day = day;
-    }
+
 
     public boolean isValid(){
         Calendar calendar = Calendar.getInstance();
