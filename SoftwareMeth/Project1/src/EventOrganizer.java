@@ -9,6 +9,8 @@ public class EventOrganizer {
         EventCalender Calender = new EventCalender();
         Date date = new Date();
         Event event = new Event();
+        Contact contact = new Contact();
+
         int year = 0;
         int month = 0;
         int day = 0;
@@ -19,13 +21,12 @@ public class EventOrganizer {
             java.lang.String Line = scanner.nextLine();
             java.lang.String[] token = Line.split(" ");
             action = token[0];
-
-
-
             if(action.equals("A")){
                 java.lang.String[] days = token[1].split("/");
                 date.setDate(Integer.parseInt(days[2]),Integer.parseInt(days[0]), Integer.parseInt(days[1]));
                 if(!date.isValid()){System.out.println(token[1] + "Invalid Calender Date");}
+                Contact.Department department = Contact.Department.valueOf(token[4]);
+                contact.setInfo(department, token[5]);
 
 
 
