@@ -1,4 +1,3 @@
-import java.util.Date;
 
 public class Event implements Comparable<Event> {
     private Date date;             // Event date
@@ -6,6 +5,8 @@ public class Event implements Comparable<Event> {
     private Location location;     // Event location
     private Contact contact;       // Event contact
     private int duration;          // Event duration in minutes
+
+
 
     public enum Timeslot{
         morning(10, 30),
@@ -21,7 +22,7 @@ public class Event implements Comparable<Event> {
     }
 
     public enum Location{
-        HILL114 ("Hill Center", "Busch"),
+        HLL114 ("Hill Center", "Busch"),
         ARC103 ("Allison Road", "Classroom, Busch"),
         BE_AUD ("Beck Hall", "Livingston"),
         TIL232 ("Tillett Hall", "Livingston"),
@@ -120,7 +121,7 @@ public class Event implements Comparable<Event> {
     // Helper method to calculate end time based on duration
     private Timeslot calculateEndTime() {
         // Add duration minutes to the start time to get the end time
-        int endHour = startTime.getHour();
+        int endHour = Timeslot.getHour();
         int endMinute = startTime.getMinute() + duration;
         if (endMinute >= 60) {
             endHour += endMinute / 60;

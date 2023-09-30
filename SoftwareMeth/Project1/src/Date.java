@@ -13,7 +13,7 @@ public class Date {
     public static final int LEAP_YEAR_DAY = 29;
     public static final int LOWEST_DAY = 1;
     public static final int EQUAL = 0;
-    public void setDate(int year, int month, int day){
+    public Date(int year, int month, int day){
         this.year = year;
         this.day = day;
         this.month = month;
@@ -60,5 +60,9 @@ public class Date {
         } else {
             return false;
         }
+    }
+
+    public int compareTo(Date date) {
+        return 1;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 public class EventCalendar {
     private Event[] events;       // Array holding the list of events
     private int numEvents;        // Current number of events in the array
