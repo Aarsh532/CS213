@@ -10,7 +10,6 @@ public class EventOrganizer {
         Date date = new Date();
         Event event = new Event();
         Contact contact = new Contact();
-
         int year = 0;
         int month = 0;
         int day = 0;
@@ -27,8 +26,6 @@ public class EventOrganizer {
                 if(!date.isValid()){System.out.println(token[1] + "Invalid Calender Date");}
                 Contact.Department department = Contact.Department.valueOf(token[4]);
                 contact.setInfo(department, token[5]);
-
-
 
 
             }
