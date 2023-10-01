@@ -1,3 +1,5 @@
+import java.util.StringTokenizer;
+
 public class Contact {
     private Department department;
     private String email;
@@ -7,38 +9,19 @@ public class Contact {
         this.email = email;
     }
 
-    // Define necessary constants for department acronyms
-    public enum Department {
-        CS, EE, ITI, MATH, BAIT
-    }
-
-    // Check if the contact information is valid
     public boolean isValid() {
-        return isDepartmentValid(department) && isEmailValid(email);
-    }
-
-    // Helper method to check if the department name is valid
-    private boolean isDepartmentValid(Department department) {
-        for (Department validDepartment : Department.values()) {
-            if (validDepartment == department) {
-                return true;
-            }
+        String[] emailParts = email.split("@");
+        if (emailParts.length != 2) {
+            return false; // Invalid email format
         }
-        return false;
-    }
 
-    // Helper method to check if the email is valid
-    private boolean isEmailValid(String email) {
-        // Check if the email has the @rutgers.edu domain
-        return email.endsWith("@rutgers.edu");
-    }
+        String domain = emailParts[1];
+        if (!domain.equals("rutgers.edu")) {
+            return false; // Invalid domain
+        }
 
-    // Getters for department and email
-    public Department getDepartment() {
-        return department;
-    }
+        // Add additional validation logic for department if needed
 
-    public String getEmail() {
-        return email;
+        return true; // Contact information is valid
     }
 }

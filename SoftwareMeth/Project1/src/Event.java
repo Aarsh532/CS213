@@ -1,101 +1,43 @@
-import java.util.Date;
+import java.text.DecimalFormat;
 
-public class Event implements Comparable<Event> {
-    private Date date;             // Event date
-    private Timeslot startTime;    // Starting time
-    private Location location;     // Event location
-    private Contact contact;       // Event contact
-    private int duration;          // Event duration in minutes
+public class Event {
+    private Date date;
+    private Timeslot timeslot;
+    private Location location;
+    private Contact contact;
+    private int duration;
 
-    // Constructor
-    public Event(Date date, Timeslot startTime, Location location, Contact contact, int duration) {
+    public Event(Date date, Timeslot timeslot, Location location, Contact contact, int duration) {
         this.date = date;
-        this.startTime = startTime;
+        this.timeslot = timeslot;
         this.location = location;
         this.contact = contact;
         this.duration = duration;
     }
 
-    // Getters and Setters for instance variables
-
-    public Date getDate() {
-        return date;
+    public boolean equals(Event otherEvent) {
+        return date.compareTo(otherEvent.date) == 0 &&
+                timeslot == otherEvent.timeslot &&
+                location == otherEvent.location &&
+                contact.isValid() && contact.equals(otherEvent.contact) &&
+                duration == otherEvent.duration;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Timeslot getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Timeslot startTime) {
-        this.startTime = startTime;
-    }
-
-    public Location getLocation() {
-        return location;
-    }
-
-    public void setLocation(Location location) {
-        this.location = location;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setContact(Contact contact) {
-        this.contact = contact;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
-    @Override
     public int compareTo(Event otherEvent) {
-        // Compare events based on date and then startTime if dates are the same
-        int dateComparison = this.date.compareTo(otherEvent.date);
-        if (dateComparison != 0) {
-            return dateComparison;
-        } else {
-            return this.startTime.compareTo(otherEvent.startTime);
+        if (date.compareTo(otherEvent.date) != 0) {
+            return date.compareTo(otherEvent.date);
         }
+
+        return timeslot.compareTo(otherEvent.timeslot);
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Event otherEvent = (Event) obj;
-        return date.equals(otherEvent.date) && startTime.equals(otherEvent.startTime) && location.equals(otherEvent.location);
-    }
-
-
-    @Override
     public String toString() {
-        return "[Event Date: " + date.toString() + "] [Start: " + startTime.toString() + "] [End: " + calculateEndTime().toString() + "] @" + location.toString() + " [Contact: " + contact.toString() + "]";
-    }
+        DecimalFormat durationFormat = new DecimalFormat("00");
+        String formattedDuration = durationFormat.format(duration);
 
-    // Helper method to calculate end time based on duration
-    private Timeslot calculateEndTime() {
-        // Add duration minutes to the start time to get the end time
-        int endHour = startTime.getHour();
-        int endMinute = startTime.getMinute() + duration;
-        if (endMinute >= 60) {
-            endHour += endMinute / 60;
-            endMinute %= 60;
-        }
-        return new Timeslot(endHour, endMinute);
+        return "[Event Date: " + date.toString() + "] [Start: " + timeslot.toString() +
+                "] [End: " + timeslot.getEndTimeslot().toString() + "] @" +
+                location.toString() + " (" + location.getLocationName() + ") [Contact: " +
+                contact.getDepartment().toString() + ", " + contact.getEmail() + "]";
     }
 }
