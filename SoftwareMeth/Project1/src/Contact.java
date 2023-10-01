@@ -24,4 +24,8 @@ public class Contact {
 
         return true; // Contact information is valid
     }
+
+    public Department getDepartment() {
+        return this.department;
+    }
 }

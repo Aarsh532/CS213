@@ -1,3 +1,4 @@
+import java.sql.Time;
 import java.text.DecimalFormat;
 
 public class Event {
@@ -39,5 +40,21 @@ public class Event {
                 "] [End: " + timeslot.getEndTimeslot().toString() + "] @" +
                 location.toString() + " (" + location.getLocationName() + ") [Contact: " +
                 contact.getDepartment().toString() + ", " + contact.getEmail() + "]";
+    }
+
+    public Location getLocation() {
+        return this.location;
+    }
+
+    public Contact getContact() {
+        return this.getContact();
+    }
+
+    public Date getDate() {
+        return this.date;
+    }
+
+    public Timeslot getStartTime() {
+        return this.timeslot;
     }
 }
