@@ -1,3 +1,4 @@
+//@author Hersh
 public class EventCalendar {
     private Event[] events;
     private int numEvents;
