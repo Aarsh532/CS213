@@ -185,8 +185,4 @@ public class EventOrganizer {
             return -1; // Invalid duration format
         }
     }
-
-    public static void main(String[] args) {
-        new EventOrganizer().run();
-    }
 }
