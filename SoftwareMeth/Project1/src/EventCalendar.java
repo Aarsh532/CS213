@@ -17,6 +17,7 @@ public class EventCalendar {
                     !isMoreThanSixMonthsAway(event.getDate())) {
                 events[numEvents] = event;
                 numEvents++;
+                System.out.println("Event added successfully!");
             } else {
                 System.out.println("Event validation failed! Please check event details and try again.");
             }
@@ -25,14 +26,6 @@ public class EventCalendar {
         }
     }
 
-    public boolean addEventSUC(Event event) {
-        if (numEvents < MAX_EVENTS) {
-            events[numEvents] = event;
-            numEvents++;
-            return true;
-        }
-        return false;
-    }
 
 
     public void print() {

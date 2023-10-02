@@ -143,12 +143,6 @@ public class EventOrganizer {
         Contact contact = new Contact(deptEnum, email);
         Event event = new Event(eventDate, timeslot, location, contact, duration);
         calendar.addEvent(event);
-        boolean isAdded = calendar.addEventSUC(event);
-        if (isAdded) {
-            System.out.println("Event Added");
-        } else{
-            System.out.println("Event could not be Added");
-        }
     }
 
 
