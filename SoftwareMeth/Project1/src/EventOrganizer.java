@@ -16,7 +16,7 @@ public class EventOrganizer {
             System.out.print("Enter command: ");
             String input = scanner.nextLine().trim();
 
-            if (input.equalsIgnoreCase("Q")) {
+            if (input.equals("Q")) {
                 break;
             }
 
@@ -28,7 +28,7 @@ public class EventOrganizer {
 
     private void processCommand(String input) {
         String[] tokens = input.split(" ");
-        String command = tokens[0].toUpperCase();
+        String command = tokens[0];
 
         switch (command) {
             case "A":
@@ -38,16 +38,32 @@ public class EventOrganizer {
                 removeEvent(tokens);
                 break;
             case "P":
-                calendar.print();
+                if (calendar.isEmpty()) {
+                    System.out.println("Calendar is empty.");
+                } else {
+                    calendar.print();
+                }
                 break;
             case "PE":
-                calendar.printByDate();
-                break;
+                if (calendar.isEmpty()) {
+                    System.out.println("Calendar is empty.");
+                }else {
+                    calendar.printByDate();
+                    break;
+                }
             case "PC":
-                calendar.printByCampus();
+                if (calendar.isEmpty()) {
+                    System.out.println("Calendar is empty.");
+                }else {
+                    calendar.printByCampus();
+                }
                 break;
             case "PD":
-                calendar.printByDepartment();
+                if (calendar.isEmpty()) {
+                    System.out.println("Calendar is empty.");
+                }else {
+                    calendar.printByDepartment();
+                }
                 break;
             default:
                 System.out.println("Invalid command.");
@@ -58,7 +74,7 @@ public class EventOrganizer {
     private void addEvent(String[] tokens) {
         StringTokenizer st = new StringTokenizer(String.join(" ", tokens));
 
-        if (st.countTokens() != 8) {
+        if (st.countTokens() != 7) {
             System.out.println("Invalid data tokens for the 'A' command.");
             return;
         }
@@ -98,6 +114,14 @@ public class EventOrganizer {
         }
 
         String location = st.nextToken().toUpperCase();
+        Location locEnum;
+        try{
+            locEnum = Location.valueOf(location);
+        } catch(IllegalArgumentException e){
+            System.out.println("Invalid location.");
+            return;
+        }
+
 
         String departmentString = st.nextToken().toUpperCase();
         Department deptEnum;
@@ -161,6 +185,13 @@ public class EventOrganizer {
         }
 
         String location = tokens[3].toUpperCase();
+        Location locEnum;
+        try{
+            locEnum = Location.valueOf(location);
+        } catch(IllegalArgumentException e){
+            System.out.println("Invalid location.");
+            return;
+        }
 
         if (!calendar.removeEvent(eventDate, timeslot, location)) {
             System.out.println("Event not found.");

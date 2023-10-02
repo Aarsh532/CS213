@@ -76,6 +76,11 @@ public class Date implements Comparable<Date> {
         return this.day - otherDate.day;
     }
 
+    @Override
+    public String toString() {
+        return day + "/" + month + "/" + year;
+    }
+
     public static void main(String[] args) {
         // Testbed main to thoroughly test the isValid() method.
 

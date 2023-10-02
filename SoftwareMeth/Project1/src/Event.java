@@ -98,11 +98,35 @@ public class Event implements Comparable<Event> {
                 startTimeStr = "6:30pm";
                 break;
         }
+
+        String endTimeStr = calculateEndTime(startTimeStr);
+
+        // Add building and campus details using the Location enum
+        Location eventLocation = Location.valueOf(location); // assuming location is a valid enum name like "HLL114"
+        String locationStr = "@" + eventLocation.getRoomNumber() + " ("
+                + eventLocation.getBuilding() + ", "
+                + eventLocation.getCampus() + ")";
+
         return "[Event Date: " + date + "] [Start: " + startTimeStr + "] [End: "
-                + (Integer.parseInt(startTimeStr.split(":")[0]) + this.duration / 60) + ":"
-                + (Integer.parseInt(startTimeStr.split(":")[1].replace("am", "").replace("pm", ""))
-                + this.duration % 60)
-                + startTimeStr.substring(startTimeStr.length() - 2) + "] @" + location + " [Contact: "
+                + endTimeStr + "] " + locationStr + " [Contact: "
                 + contact.getDepartment() + ", " + contact.getEmail() + "]";
+    }
+
+    private String calculateEndTime(String startTimeStr) {
+        int endHour = Integer.parseInt(startTimeStr.split(":")[0]) + this.duration / 60;
+        int endMinutes = Integer.parseInt(startTimeStr.split(":")[1].replace("am", "").replace("pm", ""))
+                + this.duration % 60;
+        // Adjust if minutes exceed 60
+        if (endMinutes >= 60) {
+            endHour += 1;
+            endMinutes -= 60;
+        }
+        String amPm = startTimeStr.substring(startTimeStr.length() - 2);
+        // Convert 24-hour format to 12-hour format and adjust am/pm
+        if (endHour >= 12) {
+            if (endHour > 12) endHour -= 12;
+            amPm = (amPm.equals("am")) ? "pm" : "am";
+        }
+        return endHour + ":" + String.format("%02d", endMinutes) + amPm;
     }
 }

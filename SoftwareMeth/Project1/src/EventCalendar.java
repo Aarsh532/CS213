@@ -18,6 +18,8 @@ public class EventCalendar {
         }
     }
 
+
+
     public void print() {
         for (int i = 0; i < numEvents; i++) {
             System.out.println(events[i].toString());
@@ -85,6 +87,10 @@ public class EventCalendar {
             }
         }
         return false; // Event not found
+    }
+
+    public boolean isEmpty() {
+        return numEvents == 0;
     }
 
 
