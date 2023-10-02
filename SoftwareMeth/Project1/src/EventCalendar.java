@@ -11,8 +11,14 @@ public class EventCalendar {
 
     public void addEvent(Event event) {
         if (numEvents < MAX_EVENTS) {
-            events[numEvents] = event;
-            numEvents++;
+            if (!hasConflict(event.getDate(), event.getStartTime(), event.getLocation()) &&
+                    isFutureDate(event.getDate()) &&
+                    !isMoreThanSixMonthsAway(event.getDate())) {
+                events[numEvents] = event;
+                numEvents++;
+            } else {
+                System.out.println("Event validation failed! Please check event details and try again.");
+            }
         } else {
             System.out.println("Event calendar is full! Cannot add more events.");
         }
@@ -56,6 +62,27 @@ public class EventCalendar {
         }
     }
 
+    public boolean hasConflict(Date date, Event.Timeslot timeslot, String location) {
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i].getDate().equals(date) &&
+                    events[i].getStartTime() == timeslot &&
+                    events[i].getLocation().equals(location)) {
+                return true; // Found a conflicting event
+            }
+        }
+        return false; // No conflict found
+    }
+    public boolean isFutureDate(Date eventDate) {
+        Date currentDate = Date.currentDate();
+        return eventDate.compareTo(currentDate) > 0;
+    }
+
+    public boolean isMoreThanSixMonthsAway(Date eventDate) {
+        Date currentDate = Date.currentDate();
+        Date sixMonthsLater = currentDate.addMonths(6);
+        return eventDate.compareTo(sixMonthsLater) > 0;
+    }
+
     private void bubbleSortByCampus() {
         for (int i = 0; i < numEvents - 1; i++) {
             for (int j = 0; j < numEvents - i - 1; j++) {
@@ -73,9 +100,16 @@ public class EventCalendar {
     }
 
     public boolean removeEvent(Date date, Event.Timeslot timeslot, String location) {
-        Event eventToBeRemoved = new Event(date, timeslot, location, null, 0);
+        System.out.println("Attempting to remove event: Date: " + date + ", Timeslot: " + timeslot + ", Location: " + location);  // Logging
+
         for (int i = 0; i < numEvents; i++) {
-            if (events[i].equals(eventToBeRemoved)) {
+            System.out.println("Checking event at index " + i + ": " + events[i]);  // Logging
+
+            if (events[i].getDate().equals(date) &&
+                    events[i].getStartTime() == timeslot &&
+                    events[i].getLocation().equals(location)) {
+
+                System.out.println("Match found at index " + i);  // Logging
 
                 // Remove the event by shifting all elements on its right one place to the left
                 for (int j = i; j < numEvents - 1; j++) {
@@ -86,6 +120,7 @@ public class EventCalendar {
                 return true; // Successfully removed
             }
         }
+        System.out.println("Event not found in the calendar");  // Logging
         return false; // Event not found
     }
 

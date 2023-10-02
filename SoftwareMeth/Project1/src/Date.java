@@ -28,6 +28,17 @@ public class Date implements Comparable<Date> {
         this.month = month;
         this.year = year;
     }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Date date = (Date) obj;
+        return day == date.day && month == date.month && year == date.year;
+    }
 
     public boolean isValid() {
         if (month < JANUARY || month > DECEMBER) {
@@ -74,6 +85,23 @@ public class Date implements Comparable<Date> {
             return this.month - otherDate.month;
         }
         return this.day - otherDate.day;
+    }
+    public static Date currentDate() {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        int day = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+        int month = calendar.get(java.util.Calendar.MONTH) + 1; // Calendar months are 0-based
+        int year = calendar.get(java.util.Calendar.YEAR);
+        return new Date(day, month, year);
+    }
+
+    public Date addMonths(int monthsToAdd) {
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        calendar.set(year, month - 1, day); // Calendar months are 0-based
+        calendar.add(java.util.Calendar.MONTH, monthsToAdd);
+        int newDay = calendar.get(java.util.Calendar.DAY_OF_MONTH);
+        int newMonth = calendar.get(java.util.Calendar.MONTH) + 1; // Adjusting for 0-based months
+        int newYear = calendar.get(java.util.Calendar.YEAR);
+        return new Date(newDay, newMonth, newYear);
     }
 
     @Override

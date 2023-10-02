@@ -19,6 +19,10 @@ public class Event implements Comparable<Event> {
         this.duration = duration;
     }
 
+
+
+
+
     // Getters and Setters
     public Date getDate() {
         return date;
@@ -74,6 +78,8 @@ public class Event implements Comparable<Event> {
 
     @Override
     public boolean equals(Object obj) {
+        System.out.println("Checking equals for: " + this + " and " + obj);  // Logging
+
         if (this == obj) {
             return true;
         }
@@ -81,7 +87,19 @@ public class Event implements Comparable<Event> {
             return false;
         }
         Event event = (Event) obj;
-        return date.equals(event.date) && startTime == event.startTime && location.equals(event.location);
+        boolean isEqual = this.date.equals(event.date) && startTime == event.startTime && location.equals(event.location);
+
+        System.out.println("Result of equality check: " + isEqual);  // Logging
+
+        return isEqual;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = date != null ? date.hashCode() : 0;
+        result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        return result;
     }
 
     @Override
