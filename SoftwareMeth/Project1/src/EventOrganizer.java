@@ -143,6 +143,7 @@ public class EventOrganizer {
         Contact contact = new Contact(deptEnum, email);
         Event event = new Event(eventDate, timeslot, location, contact, duration);
         calendar.addEvent(event);
+        System.out.println("Event Added");
     }
 
     private void removeEvent(String[] tokens) {
@@ -191,6 +192,9 @@ public class EventOrganizer {
 
         if (!calendar.removeEvent(eventDate, timeslot, location)) {
             System.out.println("Event not found.");
+        }
+        else {
+            System.out.println("Event removed.");
         }
     }
 }
