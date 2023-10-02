@@ -1,7 +1,7 @@
 //@author Hersh and Aarsh
 public class Contact {
 
-    private Department department; // Enum type as defined previously
+    private Department department;
     private String email;
 
 
