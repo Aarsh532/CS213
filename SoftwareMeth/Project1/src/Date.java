@@ -1,4 +1,4 @@
-//@author Hersh
+//@author Hersh and Aarsh
 public class Date implements Comparable<Date> {
 
     private int year;

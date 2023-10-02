@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 public class Event implements Comparable<Event> {
     // Enum for Timeslot
     public enum Timeslot {
@@ -129,4 +130,37 @@ public class Event implements Comparable<Event> {
         }
         return endHour + ":" + String.format("%02d", endMinutes) + amPm;
     }
+    public static void main(String[] args) {
+        //TestBed main for event class
+
+        //Valid and Invalid Dates for testing
+        Date validDate = new Date(28, 2, 2021);
+        Date invalidDate = new Date(30, 2, 2020);
+
+       Timeslot validTime = Timeslot.MORNING;
+
+       //Valid and Invalid Locations
+       String validLocation = "HLL114";
+       String invalidLocation = "ARC1231";
+
+       //Valid and Invalid Contacts
+       Contact validContact = new Contact(Department.CS, "cs@rutgers.edu");
+       Contact invalidContact = new Contact(Department.valueOf("PT"), "PT@Rutgers.edu");
+
+       //Valid Event
+        Event validEvent = new Event(validDate, validTime, validLocation, validContact, 60);
+
+        //Invalid Date event
+        Event invalidEvent1 = new Event(invalidDate, validTime, validLocation, validContact, 60);
+
+        //Invalid Location event
+        Event invalidEvent2 = new Event(validDate, validTime, invalidLocation, validContact, 60);
+
+        //Invalid Contact Event
+        Event invalidEvent3 = new Event(validDate, validTime, validLocation, invalidContact, 60);
+
+        //Invalid Duration Event
+        Event invalidEvent4 = new Event(validDate, validTime, validLocation, validContact, 130);
+    }
+
 }
