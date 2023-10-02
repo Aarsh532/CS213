@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 public enum Timeslot {
     MORNING(10, 30),       // 10:30am
     AFTERNOON(14, 0),     // 2:00pm

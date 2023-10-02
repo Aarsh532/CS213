@@ -101,16 +101,14 @@ public class EventCalendar {
     }
 
     public boolean removeEvent(Date date, Event.Timeslot timeslot, String location) {
-        System.out.println("Attempting to remove event: Date: " + date + ", Timeslot: " + timeslot + ", Location: " + location);  // Logging
 
         for (int i = 0; i < numEvents; i++) {
-            System.out.println("Checking event at index " + i + ": " + events[i]);  // Logging
 
             if (events[i].getDate().equals(date) &&
                     events[i].getStartTime() == timeslot &&
                     events[i].getLocation().equals(location)) {
 
-                System.out.println("Match found at index " + i);  // Logging
+
 
                 // Remove the event by shifting all elements on its right one place to the left
                 for (int j = i; j < numEvents - 1; j++) {
@@ -121,7 +119,6 @@ public class EventCalendar {
                 return true; // Successfully removed
             }
         }
-        System.out.println("Event not found in the calendar");  // Logging
         return false; // Event not found
     }
 

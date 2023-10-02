@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 public enum Department {
     CS("Computer Science"),
     EE("Electrical Engineering"),
