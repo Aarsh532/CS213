@@ -1,43 +1,108 @@
-import java.text.DecimalFormat;
+public class Event implements Comparable<Event> {
+    // Enum for Timeslot
+    public enum Timeslot {
+        MORNING, AFTERNOON, EVENING
+    }
 
-public class Event {
-    private Date date;
-    private Timeslot timeslot;
-    private Location location;
-    private Contact contact;
-    private int duration;
+    private Date date; // the event date
+    private Timeslot startTime; // the starting time
+    private String location;
+    private Contact contact; // includes the department name and email
+    private int duration; // in minutes
 
-    public Event(Date date, Timeslot timeslot, Location location, Contact contact, int duration) {
+    // Constructor
+    public Event(Date date, Timeslot startTime, String location, Contact contact, int duration) {
         this.date = date;
-        this.timeslot = timeslot;
+        this.startTime = startTime;
         this.location = location;
         this.contact = contact;
         this.duration = duration;
     }
 
-    public boolean equals(Event otherEvent) {
-        return date.compareTo(otherEvent.date) == 0 &&
-                timeslot == otherEvent.timeslot &&
-                location == otherEvent.location &&
-                contact.isValid() && contact.equals(otherEvent.contact) &&
-                duration == otherEvent.duration;
+    // Getters and Setters
+    public Date getDate() {
+        return date;
     }
 
-    public int compareTo(Event otherEvent) {
-        if (date.compareTo(otherEvent.date) != 0) {
-            return date.compareTo(otherEvent.date);
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Timeslot getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Timeslot startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Contact getContact() {
+        return contact;
+    }
+
+    public void setContact(Contact contact) {
+        this.contact = contact;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        // Compare dates first
+        int dateComparison = this.date.compareTo(other.date);
+        if (dateComparison != 0) {
+            return dateComparison;
         }
 
-        return timeslot.compareTo(otherEvent.timeslot);
+        // If dates are the same, compare timeslots
+        return this.startTime.compareTo(other.startTime);
     }
 
-    public String toString() {
-        DecimalFormat durationFormat = new DecimalFormat("00");
-        String formattedDuration = durationFormat.format(duration);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Event event = (Event) obj;
+        return date.equals(event.date) && startTime == event.startTime && location.equals(event.location);
+    }
 
-        return "[Event Date: " + date.toString() + "] [Start: " + timeslot.toString() +
-                "] [End: " + timeslot.getEndTimeslot().toString() + "] @" +
-                location.toString() + " (" + location.getLocationName() + ") [Contact: " +
-                contact.getDepartment().toString() + ", " + contact.getEmail() + "]";
+    @Override
+    public String toString() {
+        String startTimeStr;
+        switch (this.startTime) {
+            case MORNING:
+                startTimeStr = "10:30am";
+                break;
+            case AFTERNOON:
+                startTimeStr = "2:00pm";
+                break;
+            default: // EVENING
+                startTimeStr = "6:30pm";
+                break;
+        }
+        return "[Event Date: " + date + "] [Start: " + startTimeStr + "] [End: "
+                + (Integer.parseInt(startTimeStr.split(":")[0]) + this.duration / 60) + ":"
+                + (Integer.parseInt(startTimeStr.split(":")[1].replace("am", "").replace("pm", ""))
+                + this.duration % 60)
+                + startTimeStr.substring(startTimeStr.length() - 2) + "] @" + location + " [Contact: "
+                + contact.getDepartment() + ", " + contact.getEmail() + "]";
     }
 }

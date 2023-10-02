@@ -5,13 +5,18 @@ public enum Department {
     MATH("Mathematics"),
     BAIT("Business Analytics and Information Technology");
 
-    private String fullName;
+    private final String fullName;
 
     Department(String fullName) {
         this.fullName = fullName;
     }
 
     public String getFullName() {
+        return fullName;
+    }
+
+    @Override
+    public String toString() {
         return fullName;
     }
 }

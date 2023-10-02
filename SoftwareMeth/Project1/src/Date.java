@@ -1,9 +1,9 @@
 public class Date implements Comparable<Date> {
+
     private int year;
     private int month;
     private int day;
 
-    // Constants for months
     public static final int JANUARY = 1;
     public static final int FEBRUARY = 2;
     public static final int MARCH = 3;
@@ -17,55 +17,51 @@ public class Date implements Comparable<Date> {
     public static final int NOVEMBER = 11;
     public static final int DECEMBER = 12;
 
-    // Constants for leap year calculation
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
 
-    public Date(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
+    // Constructor
+    public Date(int day, int month, int year) {
         this.day = day;
-    }
-
-    public int getYear() {
-        return year;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public int getDay() {
-        return day;
+        this.month = month;
+        this.year = year;
     }
 
     public boolean isValid() {
-        if (year <= 0 || month < 1 || month > 12 || day < 1) {
+        if (month < JANUARY || month > DECEMBER) {
             return false;
         }
 
-        int daysInMonth;
+        if (day < 1 || day > daysInMonth(month, year)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private int daysInMonth(int month, int year) {
         switch (month) {
-            case FEBRUARY:
-                daysInMonth = isLeapYear() ? 29 : 28;
-                break;
             case APRIL:
             case JUNE:
             case SEPTEMBER:
             case NOVEMBER:
-                daysInMonth = 30;
-                break;
+                return 30;
+            case FEBRUARY:
+                return isLeapYear(year) ? 29 : 28;
             default:
-                daysInMonth = 31;
-                break;
+                return 31;
         }
-
-        return day <= daysInMonth;
     }
 
-    public boolean isLeapYear() {
-        return (year % QUADRENNIAL == 0 && (year % CENTENNIAL != 0 || year % QUATERCENTENNIAL == 0));
+    private boolean isLeapYear(int year) {
+        if (year % QUADRENNIAL == 0) {
+            if (year % CENTENNIAL == 0) {
+                return year % QUATERCENTENNIAL == 0;
+            }
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -80,15 +76,35 @@ public class Date implements Comparable<Date> {
     }
 
     public static void main(String[] args) {
-        // Test cases for Date class
-        Date validDate = new Date(2023, JANUARY, 15);
-        Date invalidDate = new Date(2023, APRIL, 31);
-        Date leapYearDate = new Date(2024, FEBRUARY, 29);
-        Date nonLeapYearDate = new Date(2023, FEBRUARY, 29);
+        // Testbed main to thoroughly test the isValid() method.
 
-        System.out.println("Valid Date: " + validDate.isValid()); // true
-        System.out.println("Invalid Date: " + invalidDate.isValid()); // false
-        System.out.println("Leap Year Date: " + leapYearDate.isValid()); // true
-        System.out.println("Non-Leap Year Date: " + nonLeapYearDate.isValid()); // false
+        // Valid non-leap year date
+        Date date1 = new Date(28, FEBRUARY, 2021);
+        System.out.println(date1.isValid());  // true
+
+        // Invalid leap year date for February
+        Date date2 = new Date(30, FEBRUARY, 2020);
+        System.out.println(date2.isValid());  // false
+
+        // Valid leap year date for February
+        Date date3 = new Date(29, FEBRUARY, 2020);
+        System.out.println(date3.isValid());  // true
+
+        // Valid date for April
+        Date date4 = new Date(30, APRIL, 2021);
+        System.out.println(date4.isValid());  // true
+
+        // Invalid date for April
+        Date date5 = new Date(31, APRIL, 2021);
+        System.out.println(date5.isValid());  // false
+
+        // Valid date for December
+        Date date6 = new Date(31, DECEMBER, 2021);
+        System.out.println(date6.isValid());  // true
+
+        // Comparing two dates
+        Date date7 = new Date(15, JUNE, 2022);
+        Date date8 = new Date(20, JUNE, 2022);
+        System.out.println(date7.compareTo(date8));  // -5 (since date7 is earlier than date8)
     }
 }

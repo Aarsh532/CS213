@@ -1,27 +1,44 @@
-import java.util.StringTokenizer;
-
 public class Contact {
-    private Department department;
+
+    private Department department; // Enum type as defined previously
     private String email;
 
+    // Constructor
     public Contact(Department department, String email) {
         this.department = department;
         this.email = email;
     }
 
+    // Getter for department
+    public Department getDepartment() {
+        return department;
+    }
+
+    // Setter for department
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    // Getter for email
+    public String getEmail() {
+        return email;
+    }
+
+    // Setter for email
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    // Check if the department and email are valid
     public boolean isValid() {
-        String[] emailParts = email.split("@");
-        if (emailParts.length != 2) {
-            return false; // Invalid email format
-        }
+        return department != null && email != null && email.contains("@");
+    }
 
-        String domain = emailParts[1];
-        if (!domain.equals("rutgers.edu")) {
-            return false; // Invalid domain
-        }
-
-        // Add additional validation logic for department if needed
-
-        return true; // Contact information is valid
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "department=" + department +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
