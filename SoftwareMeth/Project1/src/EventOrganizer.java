@@ -75,11 +75,6 @@ public class EventOrganizer {
     private void addEvent(String[] tokens) {
         StringTokenizer st = new StringTokenizer(String.join(" ", tokens));
 
-//        if (st.countTokens() != 7) {
-//            System.out.println("Invalid data tokens for the 'A' command.");
-//            return;
-//        }
-
         st.nextToken(); // Get the "A" command.
 
         String[] dateTokens = st.nextToken().split("/");
