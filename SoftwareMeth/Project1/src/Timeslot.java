@@ -4,21 +4,21 @@ public enum Timeslot {
     AFTERNOON(14, 0),     // 2:00pm
     EVENING(18, 30);      // 6:30pm
 
-    private int hour;   // hour in 24-hour format
+    private int hour;
     private int minute;
 
-    // Constructor
+
     Timeslot(int hour, int minute) {
         this.hour = hour;
         this.minute = minute;
     }
 
-    // Getter for hour
+
     public int getHour() {
         return hour;
     }
 
-    // Getter for minute
+
     public int getMinute() {
         return minute;
     }

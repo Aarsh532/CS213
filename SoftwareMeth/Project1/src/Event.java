@@ -1,17 +1,17 @@
 //@author Hersh and Aarsh
 public class Event implements Comparable<Event> {
-    // Enum for Timeslot
+
     public enum Timeslot {
         MORNING, AFTERNOON, EVENING
     }
 
-    private Date date; // the event date
-    private Timeslot startTime; // the starting time
+    private Date date;
+    private Timeslot startTime;
     private String location;
-    private Contact contact; // includes the department name and email
-    private int duration; // in minutes
+    private Contact contact;
+    private int duration;
 
-    // Constructor
+
     public Event(Date date, Timeslot startTime, String location, Contact contact, int duration) {
         this.date = date;
         this.startTime = startTime;
@@ -24,7 +24,7 @@ public class Event implements Comparable<Event> {
 
 
 
-    // Getters and Setters
+
     public Date getDate() {
         return date;
     }
@@ -67,13 +67,13 @@ public class Event implements Comparable<Event> {
 
     @Override
     public int compareTo(Event other) {
-        // Compare dates first
+
         int dateComparison = this.date.compareTo(other.date);
         if (dateComparison != 0) {
             return dateComparison;
         }
 
-        // If dates are the same, compare timeslots
+
         return this.startTime.compareTo(other.startTime);
     }
 
@@ -120,8 +120,8 @@ public class Event implements Comparable<Event> {
 
         String endTimeStr = calculateEndTime(startTimeStr);
 
-        // Add building and campus details using the Location enum
-        Location eventLocation = Location.valueOf(location); // assuming location is a valid enum name like "HLL114"
+
+        Location eventLocation = Location.valueOf(location);
         String locationStr = "@" + eventLocation.getRoomNumber() + " ("
                 + eventLocation.getBuilding() + ", "
                 + eventLocation.getCampus() + ")";
@@ -141,7 +141,7 @@ public class Event implements Comparable<Event> {
             endMinutes -= 60;
         }
         String amPm = startTimeStr.substring(startTimeStr.length() - 2);
-        // Convert 24-hour format to 12-hour format and adjust am/pm
+
         if (endHour >= 12) {
             if (endHour > 12) endHour -= 12;
             amPm = (amPm.equals("am")) ? "pm" : "am";
@@ -149,7 +149,7 @@ public class Event implements Comparable<Event> {
         return endHour + ":" + String.format("%02d", endMinutes) + amPm;
     }
     public static void main(String[] args) {
-        //TestBed main for event class
+
 
         //Valid and Invalid Dates for testing
         Date validDate = new Date(28, 2, 2021);

@@ -75,7 +75,7 @@ public class EventOrganizer {
     private void addEvent(String[] tokens) {
         StringTokenizer st = new StringTokenizer(String.join(" ", tokens));
 
-        st.nextToken(); // Get the "A" command.
+        st.nextToken();
 
         String[] dateTokens = st.nextToken().split("/");
         if (dateTokens.length != 3) {
@@ -146,6 +146,8 @@ public class EventOrganizer {
         boolean isAdded = calendar.addEventSUC(event);
         if (isAdded) {
             System.out.println("Event Added");
+        } else{
+            System.out.println("Event could not be Added");
         }
     }
 
@@ -156,7 +158,7 @@ public class EventOrganizer {
             return;
         }
 
-        // Extract data from the tokens array
+
         String[] dateTokens = tokens[1].split("/");
         if (dateTokens.length != 3) {
             System.out.println("Invalid date format.");

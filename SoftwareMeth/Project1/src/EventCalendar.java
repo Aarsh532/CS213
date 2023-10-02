@@ -29,9 +29,9 @@ public class EventCalendar {
         if (numEvents < MAX_EVENTS) {
             events[numEvents] = event;
             numEvents++;
-            return true; // Event added successfully
+            return true;
         }
-        return false; // Could not add the event
+        return false;
     }
 
 
@@ -41,7 +41,7 @@ public class EventCalendar {
         }
     }
 
-    // In-place Bubble Sort by Date
+    // Bubble Sort by Date
     private void bubbleSortByDate() {
         for (int i = 0; i < numEvents - 1; i++) {
             for (int j = 0; j < numEvents - i - 1; j++) {
@@ -55,7 +55,7 @@ public class EventCalendar {
         }
     }
 
-    // In-place Bubble Sort by Department
+    // Bubble Sort by Department
     private void bubbleSortByDepartment() {
         for (int i = 0; i < numEvents - 1; i++) {
             for (int j = 0; j < numEvents - i - 1; j++) {
@@ -76,10 +76,10 @@ public class EventCalendar {
             if (events[i].getDate().equals(date) &&
                     events[i].getStartTime() == timeslot &&
                     events[i].getLocation().equals(location)) {
-                return true; // Found a conflicting event
+                return true;
             }
         }
-        return false; // No conflict found
+        return false;
     }
     public boolean isFutureDate(Date eventDate) {
         Date currentDate = Date.currentDate();
@@ -118,16 +118,16 @@ public class EventCalendar {
 
 
 
-                // Remove the event by shifting all elements on its right one place to the left
+
                 for (int j = i; j < numEvents - 1; j++) {
                     events[j] = events[j + 1];
                 }
-                events[numEvents - 1] = null; // Remove the last duplicate event
+                events[numEvents - 1] = null;
                 numEvents--;
-                return true; // Successfully removed
+                return true;
             }
         }
-        return false; // Event not found
+        return false;
     }
 
     public boolean isEmpty() {

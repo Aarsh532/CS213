@@ -22,7 +22,7 @@ public class Date implements Comparable<Date> {
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
 
-    // Constructor
+
     public Date(int day, int month, int year) {
         this.day = day;
         this.month = month;
