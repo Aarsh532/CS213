@@ -1,4 +1,4 @@
-//@author Hersh
+//@author Hersh and Aarsh
 public enum Location {
     HLL114("HLL114", "Hill Center", "Busch"),
     ARC103("ARC103", "Allison Road Classroom", "Busch"),
