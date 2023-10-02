@@ -18,7 +18,7 @@ public class EventCalendar {
         }
     }
 
-    private void print() {
+    public void print() {
         for (int i = 0; i < numEvents; i++) {
             System.out.println(events[i].toString());
         }
@@ -68,6 +68,23 @@ public class EventCalendar {
                 }
             }
         }
+    }
+
+    public boolean removeEvent(Date date, Event.Timeslot timeslot, String location) {
+        Event eventToBeRemoved = new Event(date, timeslot, location, null, 0);
+        for (int i = 0; i < numEvents; i++) {
+            if (events[i].equals(eventToBeRemoved)) {
+
+                // Remove the event by shifting all elements on its right one place to the left
+                for (int j = i; j < numEvents - 1; j++) {
+                    events[j] = events[j + 1];
+                }
+                events[numEvents - 1] = null; // Remove the last duplicate event
+                numEvents--;
+                return true; // Successfully removed
+            }
+        }
+        return false; // Event not found
     }
 
 
