@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 public class Contact {
 
     private Department department; // Enum type as defined previously

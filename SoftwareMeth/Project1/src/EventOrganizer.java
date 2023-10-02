@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 import java.util.Scanner;
 import java.util.StringTokenizer;
 public class EventOrganizer {
@@ -73,11 +74,6 @@ public class EventOrganizer {
 
     private void addEvent(String[] tokens) {
         StringTokenizer st = new StringTokenizer(String.join(" ", tokens));
-
-        if (st.countTokens() != 7) {
-            System.out.println("Invalid data tokens for the 'A' command.");
-            return;
-        }
 
         st.nextToken(); // Get the "A" command.
 
@@ -196,11 +192,5 @@ public class EventOrganizer {
         if (!calendar.removeEvent(eventDate, timeslot, location)) {
             System.out.println("Event not found.");
         }
-    }
-
-
-    public static void main(String[] args) {
-        EventOrganizer organizer = new EventOrganizer();
-        organizer.run();
     }
 }

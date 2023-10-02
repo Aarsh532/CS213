@@ -1,3 +1,4 @@
+//@author Hersh and Aarsh
 public class EventCalendar {
     private static final int MAX_EVENTS = 100;
 
