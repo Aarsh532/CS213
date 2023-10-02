@@ -48,21 +48,21 @@ public class EventOrganizer {
             case "PE":
                 if (calendar.isEmpty()) {
                     System.out.println("Calendar is empty.");
-                }else {
+                } else {
                     calendar.printByDate();
                     break;
                 }
             case "PC":
                 if (calendar.isEmpty()) {
                     System.out.println("Calendar is empty.");
-                }else {
+                } else {
                     calendar.printByCampus();
                 }
                 break;
             case "PD":
                 if (calendar.isEmpty()) {
                     System.out.println("Calendar is empty.");
-                }else {
+                } else {
                     calendar.printByDepartment();
                 }
                 break;
@@ -111,9 +111,9 @@ public class EventOrganizer {
 
         String location = st.nextToken().toUpperCase();
         Location locEnum;
-        try{
+        try {
             locEnum = Location.valueOf(location);
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Invalid location.");
             return;
         }
@@ -143,8 +143,12 @@ public class EventOrganizer {
         Contact contact = new Contact(deptEnum, email);
         Event event = new Event(eventDate, timeslot, location, contact, duration);
         calendar.addEvent(event);
-        System.out.println("Event Added");
+        boolean isAdded = calendar.addEventSUC(event);
+        if (isAdded) {
+            System.out.println("Event Added");
+        }
     }
+
 
     private void removeEvent(String[] tokens) {
         if (tokens.length != 4) {
@@ -183,18 +187,18 @@ public class EventOrganizer {
 
         String location = tokens[3].toUpperCase();
         Location locEnum;
-        try{
+        try {
             locEnum = Location.valueOf(location);
-        } catch(IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println("Invalid location.");
             return;
         }
 
-        if (!calendar.removeEvent(eventDate, timeslot, location)) {
-            System.out.println("Event not found.");
-        }
-        else {
+        boolean isRemoved = calendar.removeEvent(eventDate, timeslot, location);
+        if (isRemoved) {
             System.out.println("Event removed.");
+        } else {
+            System.out.println("Event not found.");
         }
     }
 }

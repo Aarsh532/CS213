@@ -25,6 +25,14 @@ public class EventCalendar {
         }
     }
 
+    public boolean addEventSUC(Event event) {
+        if (numEvents < MAX_EVENTS) {
+            events[numEvents] = event;
+            numEvents++;
+            return true; // Event added successfully
+        }
+        return false; // Could not add the event
+    }
 
 
     public void print() {
